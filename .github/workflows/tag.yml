@@ -16,10 +16,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: setup
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+      # - name: setup
+      #   run: |
+      #     git config --local user.email "action@github.com"
+      #     git config --local user.name "GitHub Action"
 
       - name: Set tag
         run: |
