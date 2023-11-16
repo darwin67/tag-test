@@ -16,21 +16,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: setup
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-
       - name: Set tag
         run: |
           ./tag
           git push origin --tags
-          git describe --tags --abbrev=0
 
       - name: Export tag for downstream use
         id: export
         run: |
-          git describe --tags --abbrev=0
           echo "tag=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
 
   release:
@@ -53,4 +46,4 @@ jobs:
             type=raw,prefix=,value=${{ env.IMAGE_TAG }}
         env:
           IMAGE_TAG: ${{ needs.tag.outputs.value }}
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REGISTRY: test
