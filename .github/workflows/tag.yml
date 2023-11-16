@@ -9,15 +9,22 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       value: ${{ steps.export.outputs.tag }}
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
+      - name: setup
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
       - name: Set tag
         run: |
           ./tag
-          git push --tags
+          git push origin --tags
           git describe --tags --abbrev=0
 
       - name: Export tag for downstream use
