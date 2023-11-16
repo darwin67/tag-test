@@ -10,7 +10,7 @@ jobs:
     outputs:
       value: ${{ steps.export.outputs.tag }}
     env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
         with:
